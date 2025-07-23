@@ -1,1 +1,10 @@
+# Örnek: MNE ile EEG dosyası yükleme
+import mne
+
+raw = mne.io.read_raw_edf("your_eeg_file.edf", preload=True)
+data, times = raw.get_data(return_times=True)
+
+# data: shape (n_channels, n_timepoints)
+# Simüle ettiğimiz gibi 3. boyut için veri tekrar yapılabilir
+tensor_data = np.stack([data] * 20, axis=2)  # (channels x time x trials)
 
