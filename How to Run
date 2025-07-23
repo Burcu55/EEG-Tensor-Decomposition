@@ -1,0 +1,63 @@
+python cp_decomposition_eeg.py
+Run the script:
+
+bash
+python cp_decomposition_eeg.py
+Or open the notebook:
+
+bash
+jupyter notebook cp_decomposition_eeg.ipynb
+✍️ Author
+Burcu Tutuk
+PhD Candidate | Neuroscience | Signal Processing & Brain Data
+LinkedIn | GitHub
+
+🧠 Future Work
+Apply CP on real EEG datasets (BCI Competition, EPFL, etc.)
+
+Compare with Tucker and Non-negative Tensor Factorization
+
+Use in machine learning pipelines for brain-computer interfaces (BCIs)
+
+yaml
+
+
+---
+
+## 📓 3. `cp_decomposition_eeg.ipynb`
+
+Aşağıda bu notebook’un hücre yapısı var. Gerçek `.ipynb` dosyasını istersen oluşturup sana dosya olarak da sunabilirim.
+
+### Cell 1 – Başlık
+```markdown
+# 🧠 CP Decomposition on Simulated EEG Data
+Author: Burcu Tutuk | July 2025
+Cell 2 – Kütüphaneler
+
+import numpy as np
+import tensorly as tl
+from tensorly.decomposition import parafac
+import matplotlib.pyplot as plt
+Cell 3 – Simülasyon
+
+np.random.seed(0)
+channels, time_points, trials = 32, 100, 20
+tensor_data = np.random.rand(channels, time_points, trials)
+tensor = tl.tensor(tensor_data)
+Cell 4 – CP Decomposition
+
+rank = 3
+weights, factors = parafac(tensor, rank=rank, return_weights=True)
+channel_factors, time_factors, trial_factors = factors
+Cell 5 – Görselleştirme
+
+plt.figure(figsize=(10, 5))
+for i in range(rank):
+    plt.plot(time_factors[:, i], label=f'Component {i+1}')
+plt.title('Temporal Components from CP Decomposition')
+plt.xlabel('Time Points')
+plt.ylabel('Component Activation')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
